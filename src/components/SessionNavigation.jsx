@@ -15,11 +15,11 @@ const SessionNavigation = ({ sessionData }) => {
   const handleSessionChange = (date, testSequence) => {
     setSelectedDate(date);
     setSelectedTestSequence(testSequence);
-    setSelectedSession(null); // Reset selected session when filtering
+    setSelectedSession(null);
   };
 
   const handleBack = () => {
-    setSelectedSession(null); // Go back to session table view
+    setSelectedSession(null);
   };
 
   return (
