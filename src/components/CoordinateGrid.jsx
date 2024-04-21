@@ -27,7 +27,9 @@ const CoordinateGrid = ({ sessionData }) => {
     const x = d3
       .scaleLinear()
       .domain([
-        0,
+        d3.min(sessionData.data, (d) =>
+          Math.min(d["x-coordinates"], d["real_x-coordinates"])
+        ),
         d3.max(sessionData.data, (d) =>
           Math.max(d["x-coordinates"], d["real_x-coordinates"])
         ),
@@ -38,9 +40,11 @@ const CoordinateGrid = ({ sessionData }) => {
     const y = d3
       .scaleLinear()
       .domain([
-        0,
+        d3.min(sessionData.data, (d) =>
+          Math.min(d["z-coordinates"], d["real_z-coordinates"])
+        ),
         d3.max(sessionData.data, (d) =>
-          Math.max(d["y-coordinates"], d["real_y-coordinates"])
+          Math.max(d["z-coordinates"], d["real_z-coordinates"])
         ),
       ])
       .nice()
@@ -52,7 +56,7 @@ const CoordinateGrid = ({ sessionData }) => {
     const line = d3
       .line()
       .x((d) => x(d["x-coordinates"]))
-      .y((d) => y(d["y-coordinates"]));
+      .y((d) => y(d["z-coordinates"]));
 
     svg
       .append("path")
@@ -65,7 +69,7 @@ const CoordinateGrid = ({ sessionData }) => {
     const realLine = d3
       .line()
       .x((d) => x(d["real_x-coordinates"]))
-      .y((d) => y(d["real_y-coordinates"]));
+      .y((d) => y(d["real_z-coordinates"]));
 
     svg
       .append("path")
@@ -75,30 +79,20 @@ const CoordinateGrid = ({ sessionData }) => {
       .attr("stroke-width", 2)
       .attr("d", realLine);
 
-    // Add x-axis
+    // Add big dot at the starting point (0, 0)
     svg
-      .append("g")
-      .attr("transform", `translate(0,${height})`)
-      .call(d3.axisBottom(x));
+      .append("circle")
+      .attr("cx", x(0))
+      .attr("cy", y(0))
+      .attr("r", 6) // Adjust the radius as needed
+      .attr("fill", "black");
 
-    // Add y-axis
-    svg.append("g").call(d3.axisLeft(y));
-
-    // Add labels
-    svg
-      .append("text")
-      .attr("transform", `translate(${width / 2}, ${height + margin.top + 10})`)
-      .style("text-anchor", "middle")
-      .text("X Coordinates");
-
+    // Add starting point label
     svg
       .append("text")
-      .attr("transform", "rotate(-90)")
-      .attr("y", 0 - margin.left)
-      .attr("x", 0 - height / 2)
-      .attr("dy", "1em")
-      .style("text-anchor", "middle")
-      .text("Y Coordinates");
+      .attr("x", x(0) + 10) // Add a little padding to the right
+      .attr("y", y(0) - 10) // Add a little padding above
+      .attr("fill", "black");
   }, [sessionData]); // <-- Include sessionData in the dependency array
 
   return (

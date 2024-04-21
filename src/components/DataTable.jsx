@@ -20,8 +20,8 @@ const DataTable = ({ sessionData }) => {
           <Tr>
             <Th {...tableStyles.th}>x-coordinates</Th>
             <Th {...tableStyles.th}>real x-coordinates</Th>
-            <Th {...tableStyles.th}>y-coordinates</Th>
-            <Th {...tableStyles.th}>real y-coordinates</Th>
+            {/* <Th {...tableStyles.th}>y-coordinates</Th>
+            <Th {...tableStyles.th}>real y-coordinates</Th> */}
             <Th {...tableStyles.th}>z-coordinates</Th>
             <Th {...tableStyles.th}>real z-coordinates</Th>
             <Th {...tableStyles.th}>rotation</Th>
@@ -33,8 +33,8 @@ const DataTable = ({ sessionData }) => {
             <Tr key={index}>
               <Td {...tableStyles.td}>{item["x-coordinates"]}</Td>
               <Td {...tableStyles.td}>{item["real_x-coordinates"]}</Td>
-              <Td {...tableStyles.td}>{item["y-coordinates"]}</Td>
-              <Td {...tableStyles.td}>{item["real_y-coordinates"]}</Td>
+              {/* <Td {...tableStyles.td}>{item["y-coordinates"]}</Td>
+              <Td {...tableStyles.td}>{item["real_y-coordinates"]}</Td> */}
               <Td {...tableStyles.td}>{item["z-coordinates"]}</Td>
               <Td {...tableStyles.td}>{item["real_z-coordinates"]}</Td>
               <Td {...tableStyles.td}>{item["rotation"]}</Td>
