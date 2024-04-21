@@ -1,5 +1,4 @@
 import { Box, Table, Thead, Tbody, Tr, Th, Td } from "@chakra-ui/react";
-import React from "react";
 
 const DataTable = ({ sessionData }) => {
   // Custom Chakra UI style object
@@ -20,13 +19,13 @@ const DataTable = ({ sessionData }) => {
         <Thead>
           <Tr>
             <Th {...tableStyles.th}>x-coordinates</Th>
-            <Th {...tableStyles.th}>real_x-coordinates</Th>
+            <Th {...tableStyles.th}>real x-coordinates</Th>
             <Th {...tableStyles.th}>y-coordinates</Th>
-            <Th {...tableStyles.th}>real_y-coordinates</Th>
+            <Th {...tableStyles.th}>real y-coordinates</Th>
             <Th {...tableStyles.th}>z-coordinates</Th>
-            <Th {...tableStyles.th}>real_z-coordinates</Th>
+            <Th {...tableStyles.th}>real z-coordinates</Th>
             <Th {...tableStyles.th}>rotation</Th>
-            <Th {...tableStyles.th}>real_rotation</Th>
+            <Th {...tableStyles.th}>real rotation</Th>
           </Tr>
         </Thead>
         <Tbody>
@@ -35,11 +34,11 @@ const DataTable = ({ sessionData }) => {
               <Td {...tableStyles.td}>{item["x-coordinates"]}</Td>
               <Td {...tableStyles.td}>{item["real_x-coordinates"]}</Td>
               <Td {...tableStyles.td}>{item["y-coordinates"]}</Td>
-              <Td {...tableStyles.td}>{item["real-y-coordinates"]}</Td>
+              <Td {...tableStyles.td}>{item["real_y-coordinates"]}</Td>
               <Td {...tableStyles.td}>{item["z-coordinates"]}</Td>
-              <Td {...tableStyles.td}>{item["real-z-coordinates"]}</Td>
+              <Td {...tableStyles.td}>{item["real_z-coordinates"]}</Td>
               <Td {...tableStyles.td}>{item["rotation"]}</Td>
-              <Td {...tableStyles.td}>{item["real-rotation"]}</Td>
+              <Td {...tableStyles.td}>{item["real_rotation"]}</Td>
             </Tr>
           ))}
         </Tbody>

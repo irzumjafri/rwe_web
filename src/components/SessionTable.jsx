@@ -66,13 +66,17 @@ const SessionTable = ({
                   <Box {...tableStyles.buttonContainer}>
                     <Button
                       colorScheme="blue"
-                      onClick={() => onViewDetails(session.session_id)}
+                      onClick={() =>
+                        onViewDetails(session.session_id, "View Table")
+                      }
                     >
                       View Details
                     </Button>
                     <Button
                       colorScheme="blue"
-                      onClick={() => onViewDetails(session.session_id)}
+                      onClick={() =>
+                        onViewDetails(session.session_id, "View Map")
+                      }
                     >
                       View Map
                     </Button>
