@@ -4,27 +4,33 @@ import SessionTable from "./SessionTable";
 import SessionSelector from "./SessionSelector";
 import DataTable from "./DataTable";
 import CoordinateGrid from "./CoordinateGrid";
-import { sessionDetails } from "../sessionData";
+// import { sessionDetails } from "../sessionData";
 
-const SessionNavigation = ({ sessionData }) => {
-  const [selectedSession, setSelectedSession] = useState(null);
+const SessionNavigation = ({ sessionData, fetchSessionDetails }) => {
   const [selectedDate, setSelectedDate] = useState("");
   const [selectedTestSequence, setSelectedTestSequence] = useState("");
   const [selectedAction, setSelectedAction] = useState("");
+  const [sessionDetails, setSessionDetails] = useState(null);
 
   const handleSessionChange = (date, testSequence) => {
     setSelectedDate(date);
     setSelectedTestSequence(testSequence);
-    setSelectedSession(null);
+    setSessionDetails(null);
   };
 
   const handleBack = () => {
-    setSelectedSession(null);
+    setSessionDetails(null);
+  };
+
+  const handleDetailsClick = async (sessionId, action) => {
+    await setSessionDetails(fetchSessionDetails(sessionId));
+
+    setSelectedAction(action);
   };
 
   return (
     <Box>
-      {!selectedSession ? (
+      {!sessionDetails ? (
         <Box>
           <SessionSelector onSessionChange={handleSessionChange} />
           <SessionTable
@@ -32,8 +38,7 @@ const SessionNavigation = ({ sessionData }) => {
             selectedDate={selectedDate}
             selectedTestSequence={selectedTestSequence}
             onViewDetails={(sessionId, action) => {
-              setSelectedSession(sessionId);
-              setSelectedAction(action);
+              handleDetailsClick(sessionId, action);
             }}
           />
         </Box>
@@ -41,9 +46,9 @@ const SessionNavigation = ({ sessionData }) => {
         <Box>
           <Button onClick={handleBack}>Back</Button>
           {selectedAction === "View Map" ? (
-            <CoordinateGrid sessionData={sessionDetails[selectedSession]} />
+            <CoordinateGrid sessionData={sessionDetails} />
           ) : (
-            <DataTable sessionData={sessionDetails[selectedSession]} />
+            <DataTable sessionData={sessionDetails} />
           )}
         </Box>
       )}

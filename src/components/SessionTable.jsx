@@ -18,7 +18,8 @@ const SessionTable = ({
 }) => {
   // Filter sessions based on selected date and test sequence
   const filteredSessions = Object.values(sessionData).filter((session) => {
-    if (selectedDate && session.date !== selectedDate) return false;
+    if (selectedDate && session.date.toDate().toDateString() !== selectedDate)
+      return false;
     if (selectedTestSequence && session.test_sequence !== selectedTestSequence)
       return false;
     return true;
@@ -57,26 +58,26 @@ const SessionTable = ({
           </Thead>
           <Tbody>
             {filteredSessions.map((session) => (
-              <Tr key={session.session_id}>
-                <Td {...tableStyles.td}>{session.date}</Td>
-                <Td {...tableStyles.td}>{session.time}</Td>
-                <Td {...tableStyles.td}>{session.session_id}</Td>
+              <Tr key={session.id}>
+                <Td {...tableStyles.td}>
+                  {session.date.toDate().toDateString()}
+                </Td>
+                <Td {...tableStyles.td}>
+                  {session.date.toDate().toLocaleTimeString("en-US")}
+                </Td>
+                <Td {...tableStyles.td}>{session.id}</Td>
                 <Td {...tableStyles.td}>{session.test_sequence}</Td>
                 <Td {...tableStyles.td}>
                   <Box {...tableStyles.buttonContainer}>
                     <Button
                       colorScheme="blue"
-                      onClick={() =>
-                        onViewDetails(session.session_id, "View Table")
-                      }
+                      onClick={() => onViewDetails(session.id, "View Table")}
                     >
                       View Details
                     </Button>
                     <Button
                       colorScheme="blue"
-                      onClick={() =>
-                        onViewDetails(session.session_id, "View Map")
-                      }
+                      onClick={() => onViewDetails(session.id, "View Map")}
                     >
                       View Map
                     </Button>
