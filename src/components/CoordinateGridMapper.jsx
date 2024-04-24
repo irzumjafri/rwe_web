@@ -29,10 +29,10 @@ const CoordinateGridMapper = ({ sessionData }) => {
       .scaleLinear()
       .domain([
         d3.min(sessionData, (d) =>
-          Math.min(d["x-coordinate"], d["real_x-coordinate"])
+          Math.min(d["x_coordinate"], d["real_x_coordinate"])
         ),
         d3.max(sessionData, (d) =>
-          Math.max(d["x-coordinate"], d["real_x-coordinate"])
+          Math.max(d["x_coordinate"], d["real_x_coordinate"])
         ),
       ])
       .nice()
@@ -42,10 +42,10 @@ const CoordinateGridMapper = ({ sessionData }) => {
       .scaleLinear()
       .domain([
         d3.min(sessionData, (d) =>
-          Math.min(d["z-coordinate"], d["real_z-coordinate"])
+          Math.min(d["z_coordinate"], d["real_z_coordinate"])
         ),
         d3.max(sessionData, (d) =>
-          Math.max(d["z-coordinate"], d["real_z-coordinate"])
+          Math.max(d["z_coordinate"], d["real_z_coordinate"])
         ),
       ])
       .nice()
@@ -56,8 +56,8 @@ const CoordinateGridMapper = ({ sessionData }) => {
 
     const line = d3
       .line()
-      .x((d) => x(d["x-coordinate"]))
-      .y((d) => y(d["z-coordinate"]));
+      .x((d) => x(d["x_coordinate"]))
+      .y((d) => y(d["z_coordinate"]));
 
     svg
       .append("path")
@@ -69,8 +69,8 @@ const CoordinateGridMapper = ({ sessionData }) => {
 
     const realLine = d3
       .line()
-      .x((d) => x(d["real_x-coordinate"]))
-      .y((d) => y(d["real_z-coordinate"]));
+      .x((d) => x(d["real_x_coordinate"]))
+      .y((d) => y(d["real_z_coordinate"]));
 
     svg
       .append("path")

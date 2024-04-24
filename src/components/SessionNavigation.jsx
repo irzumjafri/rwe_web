@@ -6,28 +6,16 @@ import DataTable from "./DataTable";
 import CoordinateGrid from "./CoordinateGrid";
 // import { sessionDetails } from "../sessionData";
 
-const SessionNavigation = ({ sessionData, fetchSessionDetails }) => {
-  const [selectedDate, setSelectedDate] = useState("");
-  const [selectedTestSequence, setSelectedTestSequence] = useState("");
-  const [selectedAction, setSelectedAction] = useState("");
-  const [sessionDetails, setSessionDetails] = useState(null);
-
-  const handleSessionChange = (date, testSequence) => {
-    setSelectedDate(date);
-    setSelectedTestSequence(testSequence);
-    setSessionDetails(null);
-  };
-
-  const handleBack = () => {
-    setSessionDetails(null);
-  };
-
-  const handleDetailsClick = async (sessionId, action) => {
-    await setSessionDetails(fetchSessionDetails(sessionId));
-
-    setSelectedAction(action);
-  };
-
+const SessionNavigation = ({
+  sessionData,
+  selectedDate,
+  selectedTestSequence,
+  selectedAction,
+  sessionDetails,
+  handleBack,
+  handleSessionChange,
+  handleDetailsClick,
+}) => {
   return (
     <Box>
       {!sessionDetails ? (

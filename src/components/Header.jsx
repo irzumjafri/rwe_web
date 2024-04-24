@@ -1,6 +1,16 @@
 import { Box, Flex, Heading, Button } from "@chakra-ui/react";
 
-const Header = ({ handleFetchFirebase }) => {
+const Header = ({
+  handleFetchFirebase,
+  sessionId,
+  handleFetchSessionDetails,
+}) => {
+  const handleSyncClick = () => {
+    handleFetchFirebase();
+    if (sessionId) {
+      handleFetchSessionDetails(sessionId);
+    }
+  };
   return (
     <Box margin={16}>
       <Flex justify="space-between" align="center">
@@ -8,11 +18,7 @@ const Header = ({ handleFetchFirebase }) => {
           Redirected Walking Experiment
         </Heading>
 
-        <Button
-          colorScheme="teal"
-          variant="solid"
-          onClick={handleFetchFirebase}
-        >
+        <Button colorScheme="teal" variant="solid" onClick={handleSyncClick}>
           Sync Now
         </Button>
       </Flex>
