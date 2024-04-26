@@ -12,7 +12,7 @@ const CoordinateGridMapper = ({ sessionData }) => {
 
     d3.select(svgRef.current).selectAll("*").remove();
 
-    const margin = { top: 20, right: 30, bottom: 60, left: 60 };
+    const margin = { top: 20, right: 30, bottom: 60, left: 60, keyMargin: 20 };
     const width = 600 - margin.left - margin.right;
     const height = 400 - margin.top - margin.bottom;
 
@@ -51,6 +51,7 @@ const CoordinateGridMapper = ({ sessionData }) => {
 
     const color = "blue";
     const realColor = "red";
+    const startColor = "black";
 
     const line = d3
       .line()
@@ -80,22 +81,56 @@ const CoordinateGridMapper = ({ sessionData }) => {
 
     svg
       .append("circle")
+      .attr("cx", x(sessionData[sessionData.length - 1]["x_coordinate"]))
+      .attr("cy", y(sessionData[sessionData.length - 1]["z_coordinate"]))
+      .attr("r", 6)
+      .attr("fill", color);
+
+    svg
+      .append("circle")
+      .attr("cx", x(sessionData[sessionData.length - 1]["real_x_coordinate"]))
+      .attr("cy", y(sessionData[sessionData.length - 1]["real_z_coordinate"]))
+      .attr("r", 6)
+      .attr("fill", realColor);
+
+    svg
+      .append("circle")
       .attr("cx", x(0))
       .attr("cy", y(0))
       .attr("r", 6)
-      .attr("fill", "black");
-
-    svg
-      .append("text")
-      .attr("x", x(0) + 10)
-      .attr("y", y(0) - 10)
-      .attr("fill", "black");
+      .attr("fill", startColor);
   }, [sessionData]);
 
   return (
-    <Box>
-      <svg ref={svgRef}></svg>
-    </Box>
+    <div>
+      <Box display="flex" justifyContent="center" marginBottom="10px">
+        <div
+          style={{ display: "flex", alignItems: "center", marginRight: "20px" }}
+        >
+          <svg width="20" height="20">
+            <circle cx="10" cy="10" r="6" fill="blue" />
+          </svg>
+          <span style={{ marginLeft: "5px", color: "blue" }}>VR</span>
+        </div>
+        <div
+          style={{ display: "flex", alignItems: "center", marginRight: "20px" }}
+        >
+          <svg width="20" height="20">
+            <circle cx="10" cy="10" r="6" fill="red" />
+          </svg>
+          <span style={{ marginLeft: "5px", color: "red" }}>Real</span>
+        </div>
+        <div style={{ display: "flex", alignItems: "center" }}>
+          <svg width="20" height="20">
+            <circle cx="10" cy="10" r="6" fill="black" />
+          </svg>
+          <span style={{ marginLeft: "5px", color: "black" }}>Start</span>
+        </div>
+      </Box>
+      <Box>
+        <svg ref={svgRef}></svg>
+      </Box>
+    </div>
   );
 };
 
