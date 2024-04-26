@@ -24,7 +24,7 @@ const App = () => {
     querySnapshot.forEach((doc) => {
       data.push({ id: doc.id, ...doc.data() });
     });
-    console.log(data);
+    // console.log(data);
     setSessionDataFirebase(data);
   };
 
@@ -34,7 +34,7 @@ const App = () => {
     const subCollectionSnapshot = await getDocs(
       query(collection(docRef, "Data"), orderBy("timestamp"))
     );
-    console.log(subCollectionSnapshot);
+
     const data = [];
     subCollectionSnapshot.forEach((subDoc) => {
       data.push({
@@ -42,7 +42,8 @@ const App = () => {
         subDocId: subDoc.id,
       });
     });
-    console.log(data);
+
+    // console.log("Fetched data:", data);
 
     return data;
   };
@@ -62,7 +63,8 @@ const App = () => {
   };
 
   const handleDetailsClick = async (sessionId, action) => {
-    await setSessionDetails(handleFetchSessionDetails(sessionId));
+    const sessionDetailsArray = await handleFetchSessionDetails(sessionId);
+    setSessionDetails(sessionDetailsArray);
     setSessionId(sessionId);
     setSelectedAction(action);
   };
@@ -72,8 +74,9 @@ const App = () => {
       <Box padding={16}>
         <Header
           handleFetchFirebase={handleFetchSessions}
+          selectedAction={selectedAction}
           sessionId={sessionId}
-          handleFetchSessionDetails={handleFetchSessionDetails}
+          handleDetailsClick={handleDetailsClick}
         />
         {sessionDataFirebase ? (
           <SessionNavigation

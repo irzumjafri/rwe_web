@@ -7,12 +7,10 @@ const DataTable = ({ sessionData }) => {
   const [data, setData] = useState([]);
 
   useEffect(() => {
-    // Check if sessionData is a Promise and if it is pending
     if (sessionData instanceof Promise && isLoading) {
-      // If sessionData is a Promise and isLoading is true, show loading component
       sessionData.then((resolvedData) => {
         setData(resolvedData);
-        setIsLoading(false); // Set isLoading to false when the promise is fulfilled
+        setIsLoading(false);
       });
     }
   }, [sessionData, isLoading]);
@@ -29,10 +27,8 @@ const DataTable = ({ sessionData }) => {
   };
 
   if (isLoading && data) {
-    // If isLoading is true, render loading component
     return <Loading />;
   } else {
-    // If isLoading is false, render the table with the fetched data
     return (
       <Box overflowX="auto" margin={16}>
         <Table variant="simple" {...tableStyles.table}>
@@ -40,8 +36,8 @@ const DataTable = ({ sessionData }) => {
             <Tr>
               <Th {...tableStyles.th}>x-coordinates</Th>
               <Th {...tableStyles.th}>real x-coordinates</Th>
-              {/* <Th {...tableStyles.th}>y-coordinates</Th>
-              <Th {...tableStyles.th}>real y-coordinates</Th> */}
+              {/* <Th {...tableStyles.th}>y_coordinates</Th>
+              <Th {...tableStyles.th}>real y_coordinates</Th> */}
               <Th {...tableStyles.th}>z-coordinates</Th>
               <Th {...tableStyles.th}>real z-coordinates</Th>
               <Th {...tableStyles.th}>rotation</Th>
@@ -53,8 +49,8 @@ const DataTable = ({ sessionData }) => {
               <Tr key={index}>
                 <Td {...tableStyles.td}>{item["x_coordinate"]}</Td>
                 <Td {...tableStyles.td}>{item["real_x_coordinate"]}</Td>
-                {/* <Td {...tableStyles.td}>{item["y-coordinates"]}</Td>
-                <Td {...tableStyles.td}>{item["real_y-coordinates"]}</Td> */}
+                {/* <Td {...tableStyles.td}>{item["y_coordinates"]}</Td>
+                <Td {...tableStyles.td}>{item["real_y_coordinates"]}</Td> */}
                 <Td {...tableStyles.td}>{item["z_coordinate"]}</Td>
                 <Td {...tableStyles.td}>{item["real_z_coordinate"]}</Td>
                 <Td {...tableStyles.td}>{item["rotation"]}</Td>

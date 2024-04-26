@@ -3,12 +3,13 @@ import { Box, Flex, Heading, Button } from "@chakra-ui/react";
 const Header = ({
   handleFetchFirebase,
   sessionId,
-  handleFetchSessionDetails,
+  handleDetailsClick,
+  selectedAction,
 }) => {
   const handleSyncClick = () => {
     handleFetchFirebase();
     if (sessionId) {
-      handleFetchSessionDetails(sessionId);
+      handleDetailsClick(sessionId, selectedAction);
     }
   };
   return (

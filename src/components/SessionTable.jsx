@@ -16,7 +16,6 @@ const SessionTable = ({
   selectedTestSequence,
   onViewDetails,
 }) => {
-  // Filter sessions based on selected date and test sequence
   const filteredSessions = Object.values(sessionData).filter((session) => {
     if (selectedDate && session.date.toDate().toDateString() !== selectedDate)
       return false;
@@ -25,7 +24,6 @@ const SessionTable = ({
     return true;
   });
 
-  // Custom Chakra UI style object
   const tableStyles = {
     th: {
       fontWeight: "bold",

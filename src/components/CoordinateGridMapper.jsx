@@ -4,14 +4,12 @@ import * as d3 from "d3";
 
 const CoordinateGridMapper = ({ sessionData }) => {
   const svgRef = useRef();
-  console.log(sessionData);
 
   useEffect(() => {
     if (!sessionData || sessionData.length === 0) {
       return;
     }
 
-    // Remove previous content
     d3.select(svgRef.current).selectAll("*").remove();
 
     const margin = { top: 20, right: 30, bottom: 60, left: 60 };
@@ -80,21 +78,19 @@ const CoordinateGridMapper = ({ sessionData }) => {
       .attr("stroke-width", 2)
       .attr("d", realLine);
 
-    // Add big dot at the starting point (0, 0)
     svg
       .append("circle")
       .attr("cx", x(0))
       .attr("cy", y(0))
-      .attr("r", 6) // Adjust the radius as needed
+      .attr("r", 6)
       .attr("fill", "black");
 
-    // Add starting point label
     svg
       .append("text")
-      .attr("x", x(0) + 10) // Add a little padding to the right
-      .attr("y", y(0) - 10) // Add a little padding above
+      .attr("x", x(0) + 10)
+      .attr("y", y(0) - 10)
       .attr("fill", "black");
-  }, [sessionData]); // <-- Include sessionData in the dependency array
+  }, [sessionData]);
 
   return (
     <Box>
