@@ -3,17 +3,11 @@ import { Box, Table, Thead, Tbody, Tr, Th, Td } from "@chakra-ui/react";
 import Loading from "./Loading";
 
 const DataTable = ({ sessionData }) => {
-  const [isLoading, setIsLoading] = useState(true);
-  const [data, setData] = useState([]);
-
   useEffect(() => {
-    if (sessionData instanceof Promise && isLoading) {
-      sessionData.then((resolvedData) => {
-        setData(resolvedData);
-        setIsLoading(false);
-      });
+    if (!sessionData || sessionData.length === 0) {
+      return;
     }
-  }, [sessionData, isLoading]);
+  }, [sessionData]);
 
   const tableStyles = {
     th: {
@@ -26,7 +20,7 @@ const DataTable = ({ sessionData }) => {
     },
   };
 
-  if (isLoading && data) {
+  if (!sessionData) {
     return <Loading />;
   } else {
     return (
@@ -45,7 +39,7 @@ const DataTable = ({ sessionData }) => {
             </Tr>
           </Thead>
           <Tbody>
-            {data.map((item, index) => (
+            {sessionData.map((item, index) => (
               <Tr key={index}>
                 <Td {...tableStyles.td}>{item["x_coordinate"]}</Td>
                 <Td {...tableStyles.td}>{item["real_x_coordinate"]}</Td>

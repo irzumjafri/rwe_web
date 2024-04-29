@@ -10,6 +10,15 @@ import {
   Text,
 } from "@chakra-ui/react";
 
+function formatFirebaseTimestamp(timestamp) {
+  const date = timestamp.toDate();
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, "0"); // Add leading zero for single-digit months
+  const day = String(date.getDate()).padStart(2, "0"); // Add leading zero for single-digit days
+
+  return `${year}-${month}-${day}`;
+}
+
 const SessionTable = ({
   sessionData,
   selectedDate,
@@ -17,7 +26,7 @@ const SessionTable = ({
   onViewDetails,
 }) => {
   const filteredSessions = Object.values(sessionData).filter((session) => {
-    if (selectedDate && session.date.toDate().toDateString() !== selectedDate)
+    if (selectedDate && formatFirebaseTimestamp(session.date) !== selectedDate)
       return false;
     if (selectedTestSequence && session.test_sequence !== selectedTestSequence)
       return false;

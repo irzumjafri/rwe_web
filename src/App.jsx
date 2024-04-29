@@ -83,6 +83,8 @@ const App = () => {
             sessionData={sessionDataFirebase}
             selectedDate={selectedDate}
             selectedTestSequence={selectedTestSequence}
+            setSelectedTestSequence={setSelectedTestSequence}
+            setSelectedDate={setSelectedDate}
             selectedAction={selectedAction}
             sessionDetails={sessionDetails}
             handleSessionChange={handleSessionChange}

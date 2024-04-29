@@ -15,12 +15,20 @@ const SessionNavigation = ({
   handleBack,
   handleSessionChange,
   handleDetailsClick,
+  setSelectedDate,
+  setSelectedTestSequence,
 }) => {
   return (
     <Box>
       {!sessionDetails ? (
         <Box>
-          <SessionSelector onSessionChange={handleSessionChange} />
+          <SessionSelector
+            onSessionChange={handleSessionChange}
+            selectedDate={selectedDate}
+            selectedTestSequence={selectedTestSequence}
+            setSelectedTestSequence={setSelectedTestSequence}
+            setSelectedDate={setSelectedDate}
+          />
           <SessionTable
             sessionData={sessionData}
             selectedDate={selectedDate}

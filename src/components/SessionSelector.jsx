@@ -2,10 +2,13 @@
 import { Select, Box, FormControl, FormLabel, Input } from "@chakra-ui/react";
 import { useState } from "react";
 
-const SessionSelector = ({ onSessionChange }) => {
-  const [selectedDate, setSelectedDate] = useState("");
-  const [selectedTestSequence, setSelectedTestSequence] = useState("");
-
+const SessionSelector = ({
+  onSessionChange,
+  selectedDate,
+  setSelectedDate,
+  selectedTestSequence,
+  setSelectedTestSequence,
+}) => {
   const handleDateChange = (event) => {
     setSelectedDate(event.target.value);
     onSessionChange(event.target.value, selectedTestSequence);
@@ -30,6 +33,7 @@ const SessionSelector = ({ onSessionChange }) => {
           marginY={2}
         >
           <option value="">Select a test sequence</option>
+          <option value="demo">Demo Sequence</option>
           <option value="sequence1">Sequence 1</option>
           <option value="sequence2">Sequence 2</option>
           <option value="sequence3">Sequence 3</option>
