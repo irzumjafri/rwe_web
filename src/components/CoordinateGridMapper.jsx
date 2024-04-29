@@ -27,10 +27,20 @@ const CoordinateGridMapper = ({ sessionData }) => {
       .scaleLinear()
       .domain([
         d3.min(sessionData, (d) =>
-          Math.min(d["x_coordinate"], d["real_x_coordinate"])
+          Math.min(
+            d["x_coordinate"],
+            d["real_x_coordinate"],
+            d["z_coordinate"],
+            d["real_z_coordinate"]
+          )
         ),
         d3.max(sessionData, (d) =>
-          Math.max(d["x_coordinate"], d["real_x_coordinate"])
+          Math.max(
+            d["x_coordinate"],
+            d["real_x_coordinate"],
+            d["z_coordinate"],
+            d["real_z_coordinate"]
+          )
         ),
       ])
       .nice()
@@ -40,10 +50,20 @@ const CoordinateGridMapper = ({ sessionData }) => {
       .scaleLinear()
       .domain([
         d3.min(sessionData, (d) =>
-          Math.min(d["z_coordinate"], d["real_z_coordinate"])
+          Math.min(
+            d["z_coordinate"],
+            d["real_z_coordinate"],
+            d["z_coordinate"],
+            d["real_z_coordinate"]
+          )
         ),
         d3.max(sessionData, (d) =>
-          Math.max(d["z_coordinate"], d["real_z_coordinate"])
+          Math.max(
+            d["z_coordinate"],
+            d["real_z_coordinate"],
+            d["z_coordinate"],
+            d["real_z_coordinate"]
+          )
         ),
       ])
       .nice()
