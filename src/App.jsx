@@ -19,7 +19,9 @@ const App = () => {
   }, []);
 
   const handleFetchSessions = async () => {
-    const querySnapshot = await getDocs(collection(db, "LoggedData"));
+    const querySnapshot = await getDocs(
+      query(collection(db, "LoggedData"), orderBy("date", "desc"))
+    );
     const data = [];
     querySnapshot.forEach((doc) => {
       data.push({ id: doc.id, ...doc.data() });
